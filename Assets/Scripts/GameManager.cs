@@ -28,6 +28,11 @@ public class GameManager : MonoBehaviour
     {
         _time += Time.deltaTime;
         TimeTxt.text = _time.ToString("N2");
+
+        if (_time > 30f)
+        {
+            GameOver();
+        }
     }
 
     public void Matched()
