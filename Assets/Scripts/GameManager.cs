@@ -16,7 +16,13 @@ public class GameManager : MonoBehaviour
     public Card FirstCard;
     public Card SecondCard;
     public Text TimeTxt;
+    public GameObject EndTxt;
     float _time = 0.0f;
+    public int CardCount = 0;
+    void Start()
+    {
+        Time.timeScale = 1.0f;
+    }
 
     void Update()
     {
@@ -30,6 +36,11 @@ public class GameManager : MonoBehaviour
         {
             FirstCard.DestroyCard();
             SecondCard.DestroyCard();
+            CardCount -= 2;
+            if (CardCount == 0)
+            {
+                GameOver();
+            }
         }
         else
         {
@@ -38,5 +49,11 @@ public class GameManager : MonoBehaviour
         }
         FirstCard = null;
         SecondCard = null;
+    }
+
+    void GameOver()
+    {
+        EndTxt.SetActive(true);
+        Time.timeScale = 0.0f;
     }
 }
