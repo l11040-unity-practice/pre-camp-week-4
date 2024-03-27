@@ -8,7 +8,15 @@ public class Card : MonoBehaviour
     public GameObject Front;
     public GameObject Back;
     public Animator Anime;
+
+    AudioSource _audioSource;
+    public AudioClip Clip;
     public int Idx = 0;
+
+    void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     public void Setting(int num)
     {
@@ -18,6 +26,10 @@ public class Card : MonoBehaviour
 
     public void OpenCard()
     {
+        if (GameManager.Instance.SecondCard != null) return;
+
+        _audioSource.PlayOneShot(Clip);
+
         Anime.SetBool("isOpen", true);
         Front.SetActive(true);
         Back.SetActive(false);
